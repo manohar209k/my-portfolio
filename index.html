@@ -3,217 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kondabala Manohar | CSE Portfolio</title>
+    <title>Kondabala Manohar | CSE Matrix Portfolio</title>
     <style>
         :root {
             --matrix-green: #00ff41;
-            --matrix-dim: #003b11;
-            --bg-dark: #000000;
-            --glass: rgba(0, 0, 0, 0.85);
-            --border: rgba(0, 255, 65, 0.3);
+            --matrix-glow: rgba(0, 255, 65, 0.4);
+            --glass-bg: rgba(0, 0, 0, 0.85);
+            --border: rgba(0, 255, 65, 0.2);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Courier New', Courier, monospace;
+        /* --- THE MATRIX RAIN ENGINE (Pure CSS) --- */
+        @keyframes matrix-fall {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0%); }
         }
 
         body {
-            background-color: var(--bg-dark);
+            margin: 0;
+            background-color: black;
             color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* MATRIX RAIN BG */
-        .matrix-bg {
+        .matrix-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             z-index: -1;
             background: black;
-            opacity: 0.12;
             overflow: hidden;
+            display: flex;
+            justify-content: space-around;
+            opacity: 0.2; /* Keeps text readable */
         }
 
-        .matrix-bg::after {
-            content: "KLU_CSE_2ND_YEAR_MANOHAR_JAVA_C_PYTHON_101010101010111010101010111010101010111010101010111010101010111010101010111010101010111010101010111010101010111";
-            position: absolute;
-            top: -100%; left: 0; width: 100%;
+        /* Multiple columns of falling text for complexity */
+        .rain-col {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
             color: var(--matrix-green);
-            font-size: 18px;
-            animation: rain 8s linear infinite;
-            word-break: break-all;
+            font-size: 1.2rem;
+            line-height: 1;
+            animation: matrix-fall 10s linear infinite;
+            white-space: nowrap;
+            user-select: none;
         }
 
-        @keyframes rain { 0% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+        .rain-col:nth-child(even) { animation-duration: 7s; font-size: 0.9rem; opacity: 0.7; }
+        .rain-col:nth-child(3n) { animation-duration: 13s; font-size: 1.5rem; opacity: 0.5; }
 
-        /* Navigation */
+        /* --- UI STYLING --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
-            display: flex; justify-content: center; gap: 15px;
-            padding: 15px; background: rgba(0,0,0,0.9);
+            display: flex; justify-content: center; gap: 20px;
+            padding: 20px; background: rgba(0,0,0,0.9);
             border-bottom: 1px solid var(--border);
-            z-index: 1000; flex-wrap: wrap;
+            z-index: 1000;
         }
 
         nav a {
             color: var(--matrix-green);
-            text-decoration: none; font-size: 0.75rem; font-weight: bold;
-            text-transform: uppercase; padding: 5px 10px;
+            text-decoration: none; font-weight: bold; font-size: 0.8rem;
+            transition: 0.3s;
         }
 
-        nav a:hover { text-shadow: 0 0 10px var(--matrix-green); }
+        nav a:hover { text-shadow: 0 0 10px var(--matrix-green); color: white; }
 
         section {
             min-height: 100vh;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            padding: 100px 20px 60px 20px;
-            max-width: 1100px; margin: 0 auto;
+            padding: 80px 20px;
         }
 
-        h2 { color: var(--matrix-green); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 3px; }
-
-        /* About Section Update */
-        .about-box {
-            background: var(--glass);
-            padding: 40px; border-radius: 8px;
+        .glass-card {
+            background: var(--glass-bg);
             border: 1px solid var(--border);
-            text-align: left; max-width: 800px;
+            padding: 40px;
+            border-radius: 5px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 1);
         }
 
-        /* Projects Grid */
+        h1, h2 { color: var(--matrix-green); text-transform: uppercase; letter-spacing: 4px; }
+        
+        h1 { font-size: 3rem; text-shadow: 0 0 15px var(--matrix-glow); margin-bottom: 5px; }
+
+        /* Projects & Soft Skills Grid */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px; width: 100%;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; margin-top: 30px;
         }
 
-        .project-card {
-            background: var(--glass);
+        .item-card {
+            padding: 20px;
             border: 1px solid var(--border);
-            padding: 25px; position: relative;
-            transition: 0.3s; overflow: hidden;
+            background: rgba(0, 20, 0, 0.5);
+            transition: 0.3s;
         }
 
-        .project-card::before {
-            content: "CODE_FILE"; position: absolute;
-            top: 5px; right: 10px; font-size: 10px; color: var(--matrix-dim);
-        }
-
-        .project-card:hover {
+        .item-card:hover {
             border-color: var(--matrix-green);
-            transform: translateY(-5px);
             background: rgba(0, 255, 65, 0.05);
+            transform: scale(1.02);
         }
 
-        /* Soft Skills Tags */
-        .skills-tags {
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
-        }
-
-        .tag {
-            background: transparent;
+        /* Skill Pills */
+        .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .pill {
             border: 1px solid var(--matrix-green);
+            padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;
             color: var(--matrix-green);
-            padding: 8px 20px; border-radius: 20px;
-            font-size: 0.9rem; transition: 0.3s;
         }
 
-        .tag:hover {
-            background: var(--matrix-green); color: black;
-            box-shadow: 0 0 15px var(--matrix-green);
-        }
-
-        /* Skill Bars */
-        .skill-container { width: 100%; max-width: 600px; }
-        .bar-bg { height: 6px; background: #111; margin: 10px 0 25px 0; border-radius: 3px; }
-        .bar-fill { height: 100%; background: var(--matrix-green); border-radius: 3px; }
-
-        footer { text-align: center; padding: 40px; color: var(--matrix-dim); font-size: 0.7rem; }
+        .pill:hover { background: var(--matrix-green); color: black; font-weight: bold; }
 
     </style>
 </head>
 <body>
 
-    <div class="matrix-bg"></div>
+    <div class="matrix-container">
+        <div class="rain-col">ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ101010101</div>
+        <div class="rain-col">0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼ</div>
+        <div class="rain-col">ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ101010101</div>
+        <div class="rain-col">0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼ</div>
+        <div class="rain-col">ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ101010101</div>
+        <div class="rain-col">0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼ</div>
+        <div class="rain-col">ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ101010101</div>
+        <div class="rain-col">0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼ</div>
+    </div>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#soft-skills">Soft Skills</a>
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#projects">PROJECTS</a>
+        <a href="#skills">SKILLS</a>
     </nav>
 
     <section id="home">
-        <p style="color: var(--matrix-green); font-size: 0.8rem;">>> AUTHENTICATED_SESSION</p>
-        <h1 style="font-size: 3.5rem; color: #fff; text-shadow: 0 0 20px var(--matrix-green);">MANOHAR_K</h1>
-        <p style="color: #888;">Computer Science Student | KLU Aziznagar | Tech Visionary</p>
+        <div class="glass-card" style="text-align: center;">
+            <p style="color: var(--matrix-green); font-size: 0.8rem;">[INITIATING SESSION...]</p>
+            <h1>MANOHAR KONDABALA</h1>
+            <p>2nd Year CSE Undergrad | KLU Aziznagar Campus</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: #888;">"Turning logic into reality, one line of code at a time."</p>
+        </div>
     </section>
 
     <section id="about">
-        <h2>// ABOUT_THE_DEVELOPER</h2>
-        <div class="about-box">
-            <p>I am <strong>Kondabala Manohar</strong>, a dedicated 2nd-year CSE student at KLU University, Aziznagar. My journey in technology is driven by a deep curiosity about how software shapes the modern world.</p>
-            <br>
-            <p>Currently, I am focused on mastering backend logic through <strong>Java and C</strong>, while exploring the versatility of <strong>Python</strong>. I believe that coding is more than just syntax—it's about building efficient, scalable solutions to real-world problems. Being part of the CSE department has taught me the value of logical thinking and structured development.</p>
+        <div class="glass-card">
+            <h2>// BIOGRAPHY</h2>
+            <p style="margin-top: 20px;">
+                I am a passionate Computer Science student currently exploring the depths of software architecture at KLU. My academic path is defined by a strong foundation in **C and Java**, and I am actively expanding my horizon with **Python**. 
+            </p>
+            <p style="margin-top: 15px;">
+                Being based in the Aziznagar campus, I focus on building efficient algorithms and modern user interfaces. I believe that being a developer isn't just about writing code; it's about being an architect of the digital future.
+            </p>
         </div>
     </section>
 
     <section id="projects">
-        <h2>// SYSTEM_OUTPUT_PROJECTS</h2>
-        <div class="grid">
-            <div class="project-card">
-                <h3>Student Management System</h3>
-                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Built using Java. A console-based application to handle database operations for student records with CRUD functionality.</p>
-            </div>
-            <div class="project-card">
-                <h3>C-Logic Calculators</h3>
-                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Developed a suite of mathematical tools in C to solve complex algebraic equations and matrix manipulations.</p>
-            </div>
-            <div class="project-card">
-                <h3>Portfolio Matrix UI</h3>
-                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">A high-performance personal website built with raw HTML/CSS focusing on exclusive UI patterns and responsiveness.</p>
+        <div class="glass-card">
+            <h2>// PROJECT_DATABASE</h2>
+            <div class="grid">
+                <div class="item-card">
+                    <h3 style="color: #fff;">Student Management</h3>
+                    <p style="font-size: 0.8rem; color: #aaa;">Developed in Java using OOP concepts to manage records efficiently.</p>
+                </div>
+                <div class="item-card">
+                    <h3 style="color: #fff;">Logic Calculators</h3>
+                    <p style="font-size: 0.8rem; color: #aaa;">A C-based toolkit for solving advanced mathematical computations.</p>
+                </div>
+                <div class="item-card">
+                    <h3 style="color: #fff;">Matrix Portfolio</h3>
+                    <p style="font-size: 0.8rem; color: #aaa;">This current responsive UI built with pure CSS animations.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2>// TECHNICAL_HARDWARE</h2>
-        <div class="skill-container">
-            <p>C PROGRAMMING <span style="float:right">85%</span></p>
-            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+        <div class="glass-card">
+            <h2>// CORE_&_SOFT_SKILLS</h2>
+            <p style="margin-top: 20px; color: var(--matrix-green);">TECHNICAL HARDWARE:</p>
+            <div class="pills">
+                <div class="pill">C Programming</div>
+                <div class="pill">Java (Advanced)</div>
+                <div class="pill">Python</div>
+                <div class="pill">HTML5/CSS3</div>
+            </div>
 
-            <p>JAVA DEVELOPMENT <span style="float:right">75%</span></p>
-            <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
-
-            <p>PYTHON LITE <span style="float:right">50%</span></p>
-            <div class="bar-bg"><div class="bar-fill" style="width: 50%;"></div></div>
+            <p style="margin-top: 30px; color: var(--matrix-green);">HUMAN INTERFACE (SOFT SKILLS):</p>
+            <div class="pills">
+                <div class="pill">Super Communication</div>
+                <div class="pill">Adaptive Personality</div>
+                <div class="pill">Clear Articulation</div>
+                <div class="pill">Team Synergy</div>
+                <div class="pill">New People Friendly</div>
+            </div>
         </div>
     </section>
 
-    <section id="soft-skills">
-        <h2>// HUMAN_INTERFACE_SKILLS</h2>
-        <div class="skills-tags">
-            <div class="tag">Super Communication</div>
-            <div class="tag">Adaptive with New People</div>
-            <div class="tag">Clear Articulation</div>
-            <div class="tag">Team Collaboration</div>
-            <div class="tag">Quick Learner</div>
-            <div class="tag">Problem Solver</div>
-            <div class="tag">Active Listener</div>
-        </div>
-        <p style="margin-top: 30px; max-width: 600px; color: #888; font-size: 0.9rem;">
-            I pride myself on being able to bridge the gap between complex code and human understanding. Whether it's explaining a logic to a teammate or adapting to a new group environment, I ensure clarity and efficiency.
-        </p>
-    </section>
-
-    <footer>
-        &copy; 2026 K. MANOHAR | KLU-CSE-AZIZNAGAR | TERMINAL_V2.0
+    <footer style="text-align: center; padding-bottom: 40px; color: #444; font-size: 0.7rem;">
+        TERMINAL ACCESS: 2026.02.14 | K. MANOHAR | KLU-CSE
     </footer>
 
 </body>
