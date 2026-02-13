@@ -3,241 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kondabala Manohar | Portfolio</title>
+    <title>Kondabala Manohar | CSE Portfolio</title>
     <style>
-        /* CSS Variables for easy customization */
         :root {
-            --bg: #0a0a0c;
-            --accent: #00d4ff;
-            --text: #ffffff;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
+            --matrix-green: #00ff41;
+            --matrix-dim: #003b11;
+            --bg-dark: #000000;
+            --glass: rgba(0, 0, 0, 0.85);
+            --border: rgba(0, 255, 65, 0.3);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--bg-dark);
+            color: #e0e0e0;
             overflow-x: hidden;
-            scroll-behavior: smooth;
+            line-height: 1.6;
         }
 
-        /* Exclusive Background Animation */
-        .bg-glow {
+        /* MATRIX RAIN BG */
+        .matrix-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a0c 100%);
             z-index: -1;
+            background: black;
+            opacity: 0.12;
+            overflow: hidden;
         }
+
+        .matrix-bg::after {
+            content: "KLU_CSE_2ND_YEAR_MANOHAR_JAVA_C_PYTHON_101010101010111010101010111010101010111010101010111010101010111010101010111010101010111010101010111010101010111";
+            position: absolute;
+            top: -100%; left: 0; width: 100%;
+            color: var(--matrix-green);
+            font-size: 18px;
+            animation: rain 8s linear infinite;
+            word-break: break-all;
+        }
+
+        @keyframes rain { 0% { transform: translateY(0); } 100% { transform: translateY(100%); } }
 
         /* Navigation */
         nav {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            padding: 15px 30px;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            border: 1px solid var(--border);
-            z-index: 1000;
+            top: 0; width: 100%;
+            display: flex; justify-content: center; gap: 15px;
+            padding: 15px; background: rgba(0,0,0,0.9);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000; flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            color: var(--matrix-green);
+            text-decoration: none; font-size: 0.75rem; font-weight: bold;
+            text-transform: uppercase; padding: 5px 10px;
         }
 
-        nav a:hover { color: var(--accent); }
+        nav a:hover { text-shadow: 0 0 10px var(--matrix-green); }
 
-        /* Main Sections */
         section {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 80px 20px;
-            text-align: center;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 100px 20px 60px 20px;
+            max-width: 1100px; margin: 0 auto;
         }
 
-        /* Hero Section */
-        .hero h1 {
-            font-size: 4rem;
-            background: linear-gradient(to right, #fff, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        h2 { color: var(--matrix-green); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 3px; }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: #888;
-            margin-top: 10px;
-        }
-
-        /* Stats/Info Cards */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1000px;
-            margin-top: 40px;
-        }
-
-        .card {
+        /* About Section Update */
+        .about-box {
             background: var(--glass);
-            padding: 30px;
-            border-radius: 20px;
+            padding: 40px; border-radius: 8px;
             border: 1px solid var(--border);
-            transition: 0.4s;
+            text-align: left; max-width: 800px;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+        /* Projects Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px; width: 100%;
         }
 
-        /* Exclusive Skill Bars */
-        .skill-box {
-            width: 100%;
-            max-width: 600px;
-            text-align: left;
+        .project-card {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 25px; position: relative;
+            transition: 0.3s; overflow: hidden;
         }
 
-        .skill-item { margin-bottom: 20px; }
-        .skill-info { display: flex; justify-content: space-between; margin-bottom: 5px; }
-        .progress-bg { height: 8px; background: #222; border-radius: 10px; }
-        .progress-fill { height: 100%; background: var(--accent); border-radius: 10px; box-shadow: 0 0 10px var(--accent); }
-
-        /* "Terminal" Feature (Exclusive UI) */
-        .terminal {
-            background: #000;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: left;
-            border: 1px solid #333;
+        .project-card::before {
+            content: "CODE_FILE"; position: absolute;
+            top: 5px; right: 10px; font-size: 10px; color: var(--matrix-dim);
         }
 
-        .terminal-header {
-            background: #222;
-            padding: 10px;
-            display: flex;
-            gap: 8px;
+        .project-card:hover {
+            border-color: var(--matrix-green);
+            transform: translateY(-5px);
+            background: rgba(0, 255, 65, 0.05);
         }
 
-        .dot { width: 12px; height: 12px; border-radius: 50%; }
-        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-
-        .terminal-body {
-            padding: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            color: #00ff00;
+        /* Soft Skills Tags */
+        .skills-tags {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
         }
 
-        .cursor { display: inline-block; width: 10px; height: 18px; background: #00ff00; animation: blink 1s infinite; }
+        .tag {
+            background: transparent;
+            border: 1px solid var(--matrix-green);
+            color: var(--matrix-green);
+            padding: 8px 20px; border-radius: 20px;
+            font-size: 0.9rem; transition: 0.3s;
+        }
 
-        @keyframes blink { 50% { opacity: 0; } }
+        .tag:hover {
+            background: var(--matrix-green); color: black;
+            box-shadow: 0 0 15px var(--matrix-green);
+        }
 
-        footer { padding: 40px; color: #555; font-size: 0.8rem; }
+        /* Skill Bars */
+        .skill-container { width: 100%; max-width: 600px; }
+        .bar-bg { height: 6px; background: #111; margin: 10px 0 25px 0; border-radius: 3px; }
+        .bar-fill { height: 100%; background: var(--matrix-green); border-radius: 3px; }
+
+        footer { text-align: center; padding: 40px; color: var(--matrix-dim); font-size: 0.7rem; }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div class="matrix-bg"></div>
 
     <nav>
         <a href="#home">Home</a>
-        <a href="#about">Education</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
-        <a href="#code">Terminal</a>
+        <a href="#soft-skills">Soft Skills</a>
     </nav>
 
-    <section id="home" class="hero">
-        <p>Hello, I'm</p>
-        <h1>Kondabala Manohar</h1>
-        <p>CSE Undergrad | Tech Enthusiast | Problem Solver</p>
+    <section id="home">
+        <p style="color: var(--matrix-green); font-size: 0.8rem;">>> AUTHENTICATED_SESSION</p>
+        <h1 style="font-size: 3.5rem; color: #fff; text-shadow: 0 0 20px var(--matrix-green);">MANOHAR_K</h1>
+        <p style="color: #888;">Computer Science Student | KLU Aziznagar | Tech Visionary</p>
     </section>
 
     <section id="about">
-        <h2>Academic Journey</h2>
-        <div class="info-grid">
-            <div class="card">
-                <h3>KLU University</h3>
-                <p>Aziznagar Campus</p>
-                <small>B.Tech in Computer Science</small>
+        <h2>// ABOUT_THE_DEVELOPER</h2>
+        <div class="about-box">
+            <p>I am <strong>Kondabala Manohar</strong>, a dedicated 2nd-year CSE student at KLU University, Aziznagar. My journey in technology is driven by a deep curiosity about how software shapes the modern world.</p>
+            <br>
+            <p>Currently, I am focused on mastering backend logic through <strong>Java and C</strong>, while exploring the versatility of <strong>Python</strong>. I believe that coding is more than just syntax—it's about building efficient, scalable solutions to real-world problems. Being part of the CSE department has taught me the value of logical thinking and structured development.</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>// SYSTEM_OUTPUT_PROJECTS</h2>
+        <div class="grid">
+            <div class="project-card">
+                <h3>Student Management System</h3>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Built using Java. A console-based application to handle database operations for student records with CRUD functionality.</p>
             </div>
-            <div class="card">
-                <h3>2nd Year</h3>
-                <p>Current Standing</p>
-                <small>Focusing on Core Fundamentals</small>
+            <div class="project-card">
+                <h3>C-Logic Calculators</h3>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">Developed a suite of mathematical tools in C to solve complex algebraic equations and matrix manipulations.</p>
             </div>
-            <div class="card">
-                <h3>The Goal</h3>
-                <p>Software Development</p>
-                <small>Building scalable solutions</small>
+            <div class="project-card">
+                <h3>Portfolio Matrix UI</h3>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px;">A high-performance personal website built with raw HTML/CSS focusing on exclusive UI patterns and responsiveness.</p>
             </div>
         </div>
     </section>
 
     <section id="skills">
-        <h2>Technical Stack</h2>
-        <div class="skill-box">
-            <div class="skill-item">
-                <div class="skill-info"><span>C Programming</span><span>85%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="width: 85%;"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info"><span>Java</span><span>75%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="width: 75%;"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info"><span>Python</span><span>50%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="width: 50%;"></div></div>
-            </div>
-            <div class="skill-item">
-                <div class="skill-info"><span>HTML/CSS</span><span>90%</span></div>
-                <div class="progress-bg"><div class="progress-fill" style="width: 90%;"></div></div>
-            </div>
+        <h2>// TECHNICAL_HARDWARE</h2>
+        <div class="skill-container">
+            <p>C PROGRAMMING <span style="float:right">85%</span></p>
+            <div class="bar-bg"><div class="bar-fill" style="width: 85%;"></div></div>
+
+            <p>JAVA DEVELOPMENT <span style="float:right">75%</span></p>
+            <div class="bar-bg"><div class="bar-fill" style="width: 75%;"></div></div>
+
+            <p>PYTHON LITE <span style="float:right">50%</span></p>
+            <div class="bar-bg"><div class="bar-fill" style="width: 50%;"></div></div>
         </div>
     </section>
 
-    <section id="code">
-        <h2>Exclusive Preview</h2>
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-            </div>
-            <div class="terminal-body">
-                <p>> Manohar.location = "Aziznagar, KLU";</p>
-                <p>> Manohar.status = "Learning & Growing";</p>
-                <p>> Manohar.interests = ["Web Dev", "Problem Solving", "AI"];</p>
-                <p>> _ <span class="cursor"></span></p>
-            </div>
+    <section id="soft-skills">
+        <h2>// HUMAN_INTERFACE_SKILLS</h2>
+        <div class="skills-tags">
+            <div class="tag">Super Communication</div>
+            <div class="tag">Adaptive with New People</div>
+            <div class="tag">Clear Articulation</div>
+            <div class="tag">Team Collaboration</div>
+            <div class="tag">Quick Learner</div>
+            <div class="tag">Problem Solver</div>
+            <div class="tag">Active Listener</div>
         </div>
+        <p style="margin-top: 30px; max-width: 600px; color: #888; font-size: 0.9rem;">
+            I pride myself on being able to bridge the gap between complex code and human understanding. Whether it's explaining a logic to a teammate or adapting to a new group environment, I ensure clarity and efficiency.
+        </p>
     </section>
 
     <footer>
-        &copy; 2024 Kondabala Manohar. Built with Pure HTML & CSS.
+        &copy; 2026 K. MANOHAR | KLU-CSE-AZIZNAGAR | TERMINAL_V2.0
     </footer>
 
 </body>
